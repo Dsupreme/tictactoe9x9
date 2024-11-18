@@ -1,0 +1,30 @@
+.board {
+  @apply grid grid-cols-3 bg-gray-400 gap-1;
+}
+
+.mini-board {
+  @apply bg-white p-4;
+}
+
+.mini-board > div {
+  @apply grid grid-cols-3 bg-red-400 gap-1;
+}
+
+.mini-board > div.disabled {
+  @apply bg-gray-400;
+  pointer-events: none;
+}
+.mini-board > div.winner-o {
+  @apply bg-yellow-400;
+}
+.mini-board > div.winner-x {
+  @apply bg-green-400;
+}
+
+.mini-board > div.active {
+  @apply !bg-red-400;
+}
+
+.cell {
+  @apply bg-white p-4 min-h-16 cursor-pointer leading-8;
+}
