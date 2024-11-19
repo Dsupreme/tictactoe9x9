@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./App.css";
-import Board, { BoardProps } from "./components/Board";
+import Board from "./components/Board";
 
 const winConditions = [
   [0, 1, 2],
@@ -22,18 +22,24 @@ const createBoards = () => {
   }));
 };
 
+export interface BoardProps {
+  board: any;
+  winner: any;
+  isActive: Boolean;
+}
+
 function App() {
   const [boards, setBoards] = useState(createBoards());
   const [nextMove, setNextMove] = useState(true);
-  const [gameState, setGameState] = useState({
-    xWins: 0,
-    oWins: 0,
-    inProgress: true,
-  });
+  // const [gameState, setGameState] = useState({
+  //   xWins: 0,
+  //   oWins: 0,
+  //   inProgress: true,
+  // });
 
   // console.log(boards);
 
-  const updateMiniBoardWinner = (boardsArr: BoardProps, boardIdx: number) => {
+  const updateMiniBoardWinner = (boardsArr: BoardProps[], boardIdx: number) => {
     const board = boardsArr[boardIdx];
     if (!!board.winner) {
       return boardsArr;
@@ -55,7 +61,7 @@ function App() {
     return boardsArr;
   };
 
-  const checkGameWinner = (b) => {
+  const checkGameWinner = (b: BoardProps[]) => {
     let winner = winConditions.find((c) => {
       if (
         b[c[0]].winner == b[c[1]].winner &&
@@ -73,7 +79,7 @@ function App() {
   const onCellClick = (miniBoard: number, cell: number) => {
     let newBoards = JSON.parse(JSON.stringify(boards));
     newBoards[miniBoard].board[cell] = nextMove ? "X" : "O";
-    newBoards.forEach((b, i) => {
+    newBoards.forEach((_: any, i: number) => {
       if (i == cell) {
         newBoards[i].isActive = true;
       } else {
@@ -88,14 +94,14 @@ function App() {
     setNextMove(!nextMove);
   };
 
-  const reset = () => {
-    setBoards(createBoards());
-    setNextMove(true);
-    setGameState({
-      ...gameState,
-      inProgress: true,
-    });
-  };
+  // const reset = () => {
+  //   setBoards(createBoards());
+  //   setNextMove(true);
+  //   setGameState({
+  //     ...gameState,
+  //     inProgress: true,
+  //   });
+  // };
 
   return (
     <>

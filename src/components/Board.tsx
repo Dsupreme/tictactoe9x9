@@ -1,11 +1,12 @@
+import { type BoardProps } from "../App";
 import "./Board.css";
 
-export interface BoardProps {
-  boards: any;
-  handleCellClick: any;
+interface Props {
+  boards: BoardProps[];
+  handleCellClick: (param1: number, param2: number) => void;
 }
 
-const Board = ({ boards, handleCellClick }: BoardProps) => {
+const Board = ({ boards, handleCellClick }: Props) => {
   return (
     <div className="board">
       {boards.map((b: any, bId: number) => (
